@@ -1,0 +1,3073 @@
+{
+	"info": {
+		"_postman_id": "ce7c502e-c6d5-42da-bfab-99926aab920e",
+		"name": "ms-java-istock QA-08 june",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25711692"
+	},
+	"item": [
+		{
+			"name": "register-user Copy",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"var UserToken = pm.response.json().data.access_token;\r",
+							"console.log(UserToken);\r",
+							"pm.collectionVariables.set(\"Token_NeoBank\", UserToken);\r",
+							"var trans_id = pm.response.json().data.otp_transaction_id;\r",
+							"console.log(trans_id);\r",
+							"pm.collectionVariables.set(\"trans_id\", trans_id);\r",
+							"const schema=\r",
+							"{\r",
+							"  \r",
+							"  \"type\": \"object\",\r",
+							"  \"properties\": {\r",
+							"    \"data\": {\r",
+							"      \"type\": \"object\",\r",
+							"      \"properties\": {\r",
+							"        \"email\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"mobile_number\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"serial_number\": {\r",
+							"          \"type\": \"null\"\r",
+							"        },\r",
+							"        \"first_name\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"middle_name\": {\r",
+							"          \"type\": \"null\"\r",
+							"        },\r",
+							"        \"last_name\": {\r",
+							"          \"type\": \"null\"\r",
+							"        },\r",
+							"        \"consent_accepted\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"is_whatsapp_activated\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"is_email_auth\": {\r",
+							"          \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"status\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"created_on\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"updated_on\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"on_boarding_stage\": {\r",
+							"          \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"device_signature\": {\r",
+							"          \"type\": \"object\",\r",
+							"          \"properties\": {\r",
+							"            \"model\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"manufacturer\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"serial_number\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"device_auth_type\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"operating_sys_version\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"device_type\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"created_on\": {\r",
+							"              \"type\": \"string\"\r",
+							"            },\r",
+							"            \"updated_on\": {\r",
+							"              \"type\": \"string\"\r",
+							"            }\r",
+							"          },\r",
+							"          \"required\": [\r",
+							"            \"model\",\r",
+							"            \"manufacturer\",\r",
+							"            \"serial_number\",\r",
+							"            \"device_auth_type\",\r",
+							"            \"operating_sys_version\",\r",
+							"            \"device_type\",\r",
+							"            \"created_on\",\r",
+							"            \"updated_on\"\r",
+							"          ]\r",
+							"        },\r",
+							"        \"otp_transaction_id\": {\r",
+							"          \"type\": \"string\"\r",
+							"        },\r",
+							"        \"access_token\": {\r",
+							"          \"type\": \"string\"\r",
+							"        }\r",
+							"      },\r",
+							"      \"required\": [\r",
+							"        \"email\",\r",
+							"        \"mobile_number\",\r",
+							"        \"serial_number\",\r",
+							"        \"first_name\",\r",
+							"        \"middle_name\",\r",
+							"        \"last_name\",\r",
+							"        \"consent_accepted\",\r",
+							"        \"is_whatsapp_activated\",\r",
+							"        \"is_email_auth\",\r",
+							"        \"status\",\r",
+							"        \"created_on\",\r",
+							"        \"updated_on\",\r",
+							"        \"on_boarding_stage\",\r",
+							"        \"device_signature\",\r",
+							"        \"otp_transaction_id\",\r",
+							"        \"access_token\"\r",
+							"      ]\r",
+							"    },\r",
+							"    \"errors\": {\r",
+							"      \"type\": \"null\"\r",
+							"    },\r",
+							"    \"status\": {\r",
+							"      \"type\": \"string\"\r",
+							"    },\r",
+							"    \"stage\": {\r",
+							"      \"type\": \"integer\"\r",
+							"    }\r",
+							"  },\r",
+							"  \"required\": [\r",
+							"    \"data\",\r",
+							"    \"errors\",\r",
+							"    \"status\",\r",
+							"    \"stage\"\r",
+							"  ]\r",
+							"}\r",
+							"  pm.test(\"Validate the JSON schema\", function()\r",
+							"{\r",
+							"    pm.response.to.have.jsonSchema(schema);\r",
+							"\r",
+							"}\r",
+							"  )"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"mobile_number\": \"9800000111\",\r\n    \"model\": \"abcd\",\r\n    \"manufacturer\": \"abcd\",\r\n    \"serial_number\": \"abcd\",\r\n    \"device_auth_type\": \"4\",\r\n    \"operating_sys_version\": \"0.0.4\",\r\n    \"device_type\": \"IOS\",\r\n    \"is_whatsapp_activated\": null,\r\n    \"latitude\": \"80\",\r\n    \"longitude\": \"-179.65\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST}}/onboarding/api/register-user",
+					"host": [
+						"{{HOST}}"
+					],
+					"path": [
+						"onboarding",
+						"api",
+						"register-user"
+					]
+				},
+				"description": "This API registers user for the onboarding process. It allows user to save/update mobile number and device signature. Once data is saved OTP will be sent to respective mobile number.\n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Options** |\n| --- | --- | --- | --- | --- |\n| model | M | varchar(255) |  |  |\n| manufacturer | M | varchar(255) |  |  |\n| serial_number | M | varchar(255) |  |  |\n| device_auth_type | O | varchar(255) |  |  |\n| operating_sys_version | M | varchar(255) |  |  |\n| device_type | M | varchar(7) | IOS/ANDROID |  |\n| mobile_number | M | numeric(10) |  |  |\n| is_whatsapp_activated | O | boolean | true/false |  |\n\nFor Dev & QA Environment : we have added 5 dummy numbers to ByPass OTP, which means we are not going to send an OTP on to those numbers and the default OTP will be \"000000\". The list of dummy phone numbers are as below :\n\n9000000001, 9000000002, 9000000003, 9000000004, 9000000005"
+			},
+			"response": [
+				{
+					"name": "register-user with stage",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"mobile_number\": \"8527834259\",\r\n    \"model\": \"abcd\",\r\n    \"manufacturer\": \"abcd\",\r\n    \"serial_number\": \"abcd\",\r\n    \"device_auth_type\": \"4\",\r\n    \"operating_sys_version\": \"0.0.4\",\r\n    \"device_type\": \"IOS\",\r\n    \"is_whatsapp_activated\": null\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "3.110.133.1:9001/api/register-user",
+							"host": [
+								"3",
+								"110",
+								"133",
+								"1"
+							],
+							"port": "9001",
+							"path": [
+								"api",
+								"register-user"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Cache-Control",
+							"value": "no-cache, no-store, max-age=0, must-revalidate"
+						},
+						{
+							"key": "Pragma",
+							"value": "no-cache"
+						},
+						{
+							"key": "Expires",
+							"value": "0"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "DENY"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 16 Mar 2023 07:49:54 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"email\": null,\n        \"mobile_number\": \"8527834259\",\n        \"serial_number\": null,\n        \"first_name\": null,\n        \"middle_name\": null,\n        \"last_name\": null,\n        \"consent_accepted\": false,\n        \"is_whatsapp_activated\": false,\n        \"is_email_auth\": false,\n        \"status\": \"I\",\n        \"created_on\": \"15-03-2023 15:01:16\",\n        \"updated_on\": \"16-03-2023 13:19:53\",\n        \"on_boarding_stage\": 1,\n        \"device_signature\": {\n            \"model\": \"abcd\",\n            \"manufacturer\": \"abcd\",\n            \"serial_number\": \"abcd\",\n            \"device_auth_type\": \"4\",\n            \"operating_sys_version\": \"0.0.4\",\n            \"device_type\": \"IOS\",\n            \"created_on\": \"15-03-2023 15:01:16\",\n            \"updated_on\": \"16-03-2023 13:19:53\"\n        },\n        \"otp_transaction_id\": \"2383cc7a-c3cf-11ed-99b9-17f82302ec3c\",\n        \"access_token\": \"eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIzNCIsImV4cCI6MTY3ODk1NjU5NCwiaWF0IjoxNjc4OTUyOTk0fQ.jJfPzgHqbFF1RGGKeXRNhDQs5X_m4Gadqwr7BMqAXMM\"\n    },\n    \"errors\": null,\n    \"status\": \"200\",\n    \"stage\": 0\n}"
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/istock/api/shoonya-login",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"shoonya-login"
+					]
+				},
+				"description": "This API is used to get shoonya Login Token which is required for all the Shoonya APIs.  \nAfter that it will call the integration layer API which we will call Shoonya Login API and return token in response which we will save in shoonya_user_details.\n\nOnBoarding Authorization Bearer Token is mandatory."
+			},
+			"response": [
+				{
+					"name": "Login",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:9004/istock/api/shoonya-login",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"shoonya-login"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 06:01:13 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"susertoken\": \"fa4f522e5abc57a7645cdf5abf48d88284a0f87b9b5bb1d0010e94142500d237\"\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "get security info",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/istock/api/security-info?token=2885&exch=NSE",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"security-info"
+					],
+					"query": [
+						{
+							"key": "jKey",
+							"value": "4967eba9494c6540fa83fcbbf40e2cb87b13804d57ac1102cf9e3df4f1627ca4",
+							"disabled": true
+						},
+						{
+							"key": "token",
+							"value": "2885"
+						},
+						{
+							"key": "exch",
+							"value": "NSE"
+						}
+					]
+				},
+				"description": "1.This Api is used to fetch detail from Integration layer\n\n2\\. Integration layer fetch the detail from shoonya API\n\n3\\. Security info api used to get stock detail\n\n4\\. OnBoarding Authorization Bearer Token is mandatory."
+			},
+			"response": [
+				{
+					"name": "get security info",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:9004/istock/api/secuirty-info?exch=NFO&token=54823",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"secuirty-info"
+							],
+							"query": [
+								{
+									"key": "exch",
+									"value": "NFO"
+								},
+								{
+									"key": "token",
+									"value": "54823"
+								},
+								{
+									"key": "jKey",
+									"value": "4967eba9494c6540fa83fcbbf40e2cb87b13804d57ac1102cf9e3df4f1627ca4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 06:05:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"request_time\": \"11:31:07 26-04-2023\",\n        \"stat\": \"Ok\",\n        \"exch\": \"NFO\",\n        \"tsym\": \"AARTIIND27APR23C450\",\n        \"cname\": \"AARTIIND APR 450 CE \",\n        \"symname\": \"AARTIIND\",\n        \"seg\": \"DER\",\n        \"exd\": \"27-APR-2023\",\n        \"instname\": \"OPTSTK\",\n        \"optt\": \"CE\",\n        \"und_exch\": \"NSE\",\n        \"und_tk\": \"7\",\n        \"pp\": \"2\",\n        \"prcftr\": \"1.000000\",\n        \"ls\": \"850\",\n        \"ti\": \"0.05\",\n        \"mult\": \"1\",\n        \"dname\": \"AARTIIND APR 450 CE \",\n        \"uc\": \"145.95\",\n        \"lc\": \"59.15\",\n        \"strprc\": \"450.00\",\n        \"prcftr_d\": \"(1 / 1 ) * (1 / 1)\",\n        \"token\": \"54823\",\n        \"frzqty\": \"42501\",\n        \"delmrg\": \"0.00\",\n        \"varmrg\": \"0.00\",\n        \"expmrg\": \"3.50\"\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Add Scrip",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImV4cCI6MTcxNDU0MTc3OCwiaWF0IjoxNjgzMDA1Nzc4fQ.NzNCTTftT8xQYrJ_kEDNsmNsl4sjFuxFTDZNDoxGLik",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"wlname\" : \"Kamal watchlist\",\r\n    \"scrips\": [{\r\n        \"exchange\" :\"NSE\",\r\n        \"scriptcode\":\"20323\"\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}:9004/istock/api/add-scrip-watchlist",
+					"host": [
+						"{{url}}"
+					],
+					"port": "9004",
+					"path": [
+						"istock",
+						"api",
+						"add-scrip-watchlist"
+					]
+				},
+				"description": "- Type : POST\n- This api is used for saving user watch list.\n- wlname is name of watch list and scrips hold the value for exchange and scrip code.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| wlname | M | VARCHAR |  | Only Alpha-Numeric Allowed |\n| scrips | M | Object |  | Required |\n| exchange | M | VARCHAR |  | Only NSE or BSE Allowed |\n| scriptcode | M | VARCHAR |  | Only Alpha-Numeric Allowed |"
+			},
+			"response": [
+				{
+					"name": "Add Scrip",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"wlname\" : \"Kamal watchlist\",\r\n    \"scrips\": [{\r\n        \"exchange\" :\"NSE\",\r\n        \"scriptcode\":\"20323\"\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:9004/istock/api/add-scrip-watchlist",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"add-scrip-watchlist"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 06:01:39 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"stat\": \"Ok\",\n        \"request_time\": \"11:27:36 26-04-2023\",\n        \"emsg\": null\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Place Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"exch\": \"NSE\",\n    \"tsym\": \"PNB\",\n    \"qty\": \"2\",\n    \"dscqty\": \"0\",\n    \"prd\": \"C\",\n    \"trantype\": \"B\",\n    \"ret\": \"DAY\",\n    \"prc\":\"51.95\",\n    \"prctyp\":\"LMT\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/place-order",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"place-order"
+					]
+				},
+				"description": "- Type : POST\n- OnBoarding Authorization Bearer Token is mandatory.\n- This api is used for Place order.\n- Currenlty we are able to place a order for POA users.\n- There is no validation on backend side.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| exch | M | VARCHAR |  | Only NSE or BSE |\n| tsym | M | VARCHAR |  | No validtaion added |\n| qty | M | VARCHAR |  | Only Numeric |\n| ret | M | VARCHAR |  | DAY or EOS or IOC |\n| trantype | M | VARCHAR |  | Only S or B |\n| prctyp | M | VARCHAR |  | Only MKT or LMT |\n| ordersource | NR | VARCHAR | MOB | No need to send in request body, handled from back end. |\n| prd | NR | VARCHAR | C | No need to send in request body, handled from back end. |\n| mkt_protection | NR | VARCHAR | 5 | No need to send in request body, handled from back end. |\n| prc | M | INTEGER |  |   <br>Only Numeric and Dot Allowed |\n\n**Acceptance Criteria:**\n\n1. There is some field that will handle from back end like ( mkt_protection , prd, ordersource ,) so no need to send in request body.\n2. At back end there is some validation added that will check request value is correct or not. Like exch only accept NSE and BSE.\n    \n\nThere is some points that will hanldle by Front End.\n\n1. POA and non POA user will be check by front side. so there will be no check for user is POA or Non POA.\n2. prc value will handle by front side.\n3. All the calculation for mkt_protection will be handle at front side. No logic is added for prc and mkt_ptotection\n    \n\nExample :\n\nThe following request is generated by Neo Bank API At integration layer. That request was sent to Shoonya for place order\n\nComplete request send to shoonya for place order. Actid and uid will be added at integrtaion layer in code base. so from qa side there is no need to focus on these two field. will mamage at integation layer.\n\njData = {\n\n\"actid\": \"TEST10\",\n\n\"uid\": \"TEST10\",\n\n\"exch\": \"NSE\",\n\n\"tsym\": \"IMAGICAA-EQ\",\n\n\"qty\": \"1\",\n\n\"prc\": \"0.0\",\n\n\"trantype\": \"B\",\n\n\"ret\": \"DAY\",\n\n\"prctyp\": \"MKT\",\n\n\"ordersource\": \"MOB\",\n\n\"prd\": \"C\",\n\n\"mkt_protection\": \"5\"\n\n} & jKey = e83744885783b35f466605152400e9996b94c942cb796239898cb49eb0a4270b\n\nResponse for this order is :\n\n\"stat\": \"Ok\",\n\n\"request_time\": \"17:46:08 12-06-2023\",\n\n\"norenordno\": \"23061200000125\","
+			},
+			"response": [
+				{
+					"name": "Place Order",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"exch\": \"NSE\",\n    \"tsym\": \"PNB-EQ\",\n    \"qty\": \"2\",\n    \"dscqty\": \"0\",\n    \"prd\": \"C\",\n    \"trantype\": \"B\",\n    \"ret\": \"DAY\",\n    \"prc\":\"51.95\",\n    \"prctyp\":\"LMT\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/place-order",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"place-order"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 19 Jun 2023 10:41:06 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"stat\": \"Ok\",\n        \"request_time\": \"16:06:24 19-06-2023\",\n        \"norenordno\": \"23061900000010\",\n        \"emsg\": null\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "delete scrip-watchlist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiIxMiIsImV4cCI6MTcxNDU0MTc3OCwiaWF0IjoxNjgzMDA1Nzc4fQ.NzNCTTftT8xQYrJ_kEDNsmNsl4sjFuxFTDZNDoxGLik",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\t{\r\n    \"wlname\":\"newname 1\",\r\n    \"scrips\": [{\r\n        \"exchange\" :\"NSE\",\r\n        \"scriptcode\" :17903\r\n    }]\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:9004/istock/api/scrip-watchlist",
+					"host": [
+						"localhost"
+					],
+					"port": "9004",
+					"path": [
+						"istock",
+						"api",
+						"scrip-watchlist"
+					]
+				},
+				"description": "Delete Scrip from watchlist\n\n- This DELETE API used for deleting scrips from watchlist.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\nView More\n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| wlnam | M | varchar |  | wlname is name of watchlist |\n| scrips | M | varchar |  | acrips contaion exchange and scriptcode |\n|  |  |  |  |  |\n\n- HttpStatus.OK :satus is 200 and data \"scrip deleted sucessfully\""
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "jkey",
+								"value": "4355dda5bddbf4077a43e0e96602a227394e6788826d7195e374a436e19d9c0c",
+								"type": "text"
+							},
+							{
+								"key": "uid",
+								"value": "TEST10",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\t{\r\n    \"wlname\":\"newname 1\",\r\n    \"scrips\": [{\r\n        \"exchange\" :\"NSE\",\r\n        \"scriptcode\" :17903\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9004/istock/api/scrip-watchlist",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"scrip-watchlist"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 09:18:36 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": \"scrip deleted successfully\",\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				},
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "jkey",
+								"value": "4355dda5bddbf4077a43e0e96602a227394e6788826d7195e374a436e19d9c0c",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uid",
+								"value": "TEST10",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "\t{\r\n    \"wlname\":\"newname 1\",\r\n    \"scrips\": [{\r\n        \"exchange\" :\"NSE\",\r\n        \"scriptcode\" :17903\r\n    }]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:9004/istock/api/scrip-watchlist",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"scrip-watchlist"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 09:55:14 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": \"scrip deleted successfully\",\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Verify Order margin",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{    \r\n    \"exch\": \"NSE\",\r\n    \"tsym\": \"PNB-EQ\",\r\n    \"qty\": \"101\",\r\n    \"trantype\": \"S\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/verify-order-margin",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"verify-order-margin"
+					]
+				},
+				"description": "Type : POST\n\n- This POST API is used to verify order margin for Place Order.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| exch | M | VARCHAR |  | Only NSE is Allowed |\n| tysm | M | VARCHAR |  |  |\n| qty | M | VARCHAR |  | Only Positive Integer Value is Allowed |\n| trantype | M | VARCHAR |  | Only B or S is Allowed |"
+			},
+			"response": [
+				{
+					"name": "Verify Order margin - true",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"exch\": \"NSE\",\r\n    \"tsym\": \"ACC-EQ\",\r\n    \"qty\": \"1000\",\r\n    \"prc\": \"160000.35\",\r\n    \"trantype\": \"B\",    \r\n    \"prd\": \"C\",\r\n    \"prctyp\":\"MKT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:9004/istock/api/verify-order-margin",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"verify-order-margin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 06:02:49 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"cash\": \"999999999.15\",\n        \"margin_used\": \"160000350.00\",\n        \"remarks\": \"Order Success\",\n        \"margin_used_prev\": \"0.00\",\n        \"order_margin\": \"160000350.00\",\n        \"order_margin_available\": true\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				},
+				{
+					"name": "Verify Order margin - false",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"exch\": \"NSE\",\r\n    \"tsym\": \"ACC-EQ\",\r\n    \"qty\": \"100000\",\r\n    \"prc\": \"160000.35\",\r\n    \"trantype\": \"B\",    \r\n    \"prd\": \"C\",\r\n    \"prctyp\":\"MKT\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:9004/istock/api/verify-order-margin",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"verify-order-margin"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 06:02:49 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"cash\": \"999999999.15\",\n        \"margin_used\": \"15000035000.85\",\n        \"remarks\": \"Insufficient Balance\",\n        \"margin_used_prev\": \"0.00\",\n        \"order_margin\": \"16000035000.00\",\n        \"order_margin_available\": false\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Search Scrip",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"stext\": \"PNB\",\r\n    \"exch\" : \"NSE\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/search-scrip",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"search-scrip"
+					]
+				},
+				"description": "Type : POST\n\n- This POST API is used to search scrip\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| stext | M | VARCHAR |  | Only Alpha-Numeric Allowed |\n| exch | O | VARCHAR |  | NSE |"
+			},
+			"response": [
+				{
+					"name": "Search Scrip",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"stext\": \"PNB\",\r\n    \"exch\" : \"NSE\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:9004/istock/api/search-scrip",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"search-scrip"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Thu, 27 Apr 2023 12:09:57 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"values\": [\n            {\n                \"exch\": \"NSE\",\n                \"token\": \"18908\",\n                \"tsym\": \"PNBHOUSING-EQ\",\n                \"cname\": \"PNB HOUSING FIN LTD.\",\n                \"instname\": \"EQ\",\n                \"pp\": \"2\",\n                \"ls\": \"1\",\n                \"ti\": \"0.05\"\n            },\n            {\n                \"exch\": \"NSE\",\n                \"token\": \"8736\",\n                \"tsym\": \"PNBGILTS-EQ\",\n                \"cname\": \"PNB GILTS LIMITED\",\n                \"instname\": \"EQ\",\n                \"pp\": \"2\",\n                \"ls\": \"1\",\n                \"ti\": \"0.05\"\n            },\n            {\n                \"exch\": \"NSE\",\n                \"token\": \"10666\",\n                \"tsym\": \"PNB-EQ\",\n                \"cname\": \"PUNJAB NATIONAL BANK\",\n                \"instname\": \"EQ\",\n                \"pp\": \"2\",\n                \"ls\": \"1\",\n                \"ti\": \"0.05\"\n            }\n        ]\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Trade Book",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/trade-book",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"trade-book"
+					]
+				},
+				"description": "- Type : GET\n- This api is used to get List of trade book from shoonya for logged in user.\n- OnBoarding Authorization Bearer Token is mandatory."
+			},
+			"response": [
+				{
+					"name": "Trade Book",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "localhost:9004/istock/api/trade-book",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"trade-book"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 09 May 2023 08:31:43 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"tradebookResponse\": [\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"RAIN-EQ\",\n                \"norenordno\": \"23050900000035\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020122\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"100\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"TCS-EQ\",\n                \"norenordno\": \"23050900000039\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020227\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"100\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"TCS-EQ\",\n                \"norenordno\": \"23050900000039\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020227\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"100\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"TCS-EQ\",\n                \"norenordno\": \"23050900000039\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020227\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"WIPRO-EQ\",\n                \"norenordno\": \"23050900000038\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020210\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"100\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"RELIANCE-EQ\",\n                \"norenordno\": \"23050900000040\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020253\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"100\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"RELIANCE-EQ\",\n                \"norenordno\": \"23050900000040\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020253\"\n            },\n            {\n                \"stat\": \"Ok\",\n                \"qty\": \"20\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"RAIN-EQ\",\n                \"norenordno\": \"23050900000035\",\n                \"trantype\": \"B\",\n                \"exchordid\": \"1300000000020122\"\n            }\n        ]\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Cancel Order",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/cancel-order?norenordno=23051700000024",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"cancel-order"
+					],
+					"query": [
+						{
+							"key": "norenordno",
+							"value": "23051700000024"
+						}
+					]
+				},
+				"description": "- Type : GET\n- This api is used to cancel order against given norenordno from shoonya for logged in user.\n- OnBoarding Authorization Bearer Token is mandatory."
+			},
+			"response": [
+				{
+					"name": "Cancel Order",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:9004/istock/api/cancel-order?norenordno=23050900000056",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"cancel-order"
+							],
+							"query": [
+								{
+									"key": "norenordno",
+									"value": "23050900000056"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 09 May 2023 08:31:43 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"stat\": \"Ok\",\n        \"request_time\": \"14:21:13 09-05-2023\",\n        \"result\": \"23050900000056\"\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Get All Order Book",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/istock/api/order-book",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"order-book"
+					],
+					"query": [
+						{
+							"key": "jKey",
+							"value": "4967eba9494c6540fa83fcbbf40e2cb87b13804d57ac1102cf9e3df4f1627ca4",
+							"disabled": true
+						}
+					]
+				},
+				"description": "1.This Api is used to fetch all order detail from Integration layer\n\n1. Integration layer fetch the detail from shoonya API\n2. Get Order Book api used to get all order detail\n3. OnBoarding Authorization Bearer Token is mandatory.\n4. Used for only market orders.  \n    \n\nThe following request and response for this api.\n\nSuccess Response :\n\n{\n\n```\n\"data\": {\n    \"orderBook\": [\n        {\n            \"stat\": \"Ok\",\n            \"norenordno\": \"23050200000033\",\n            \"kidid\": \"1\",\n            \"uid\": \"TEST1\",\n            \"actid\": \"TEST1\",\n            \"exch\": \"NSE\",\n            \"tsym\": \"ACC-EQ\",\n            \"qty\": \"2\",\n            \"ordenttm\": \"1683020711\",\n            \"trantype\": \"B\",\n            \"prctyp\": \"MKT\",\n            \"ret\": \"DAY\",\n            \"token\": \"22\",\n            \"mult\": \"1\",\n            \"prcftr\": \"1.000000\",\n            \"pp\": \"2\",\n            \"ls\": \"1\",\n            \"ti\": \"0.05\",\n            \"prc\": \"0.00\",\n            \"rprc\": \"1763.00\",\n            \"dscqty\": \"0\",\n            \"s_prdt_ali\": \"NRML\",\n            \"prd\": \"M\",\n            \"status\": \"COMPLETE\",\n            \"st_intrn\": \"COMPLETE\",\n            \"norentm\": \"15:15:11 02-05-2023\",\n            \"remarks\": \"WC TEST Order\",\n            \"rejreason\": null,\n            \"rqty\": \"2\"\n        },\n        {\n            \"stat\": \"Ok\",\n            \"norenordno\": \"23050200000032\",\n            \"kidid\": \"1\",\n            \"uid\": \"TEST1\",\n            \"actid\": \"TEST1\",\n            \"exch\": \"NSE\",\n            \"tsym\": \"ACC-EQ\",\n            \"qty\": \"2\",\n            \"ordenttm\": \"1683020710\",\n            \"trantype\": \"B\",\n            \"prctyp\": \"MKT\",\n            \"ret\": \"DAY\",\n            \"token\": \"22\",\n            \"mult\": \"1\",\n            \"prcftr\": \"1.000000\",\n            \"pp\": \"2\",\n            \"ls\": \"1\",\n            \"ti\": \"0.05\",\n            \"prc\": \"0.00\",\n            \"rprc\": \"1763.00\",\n            \"dscqty\": \"0\",\n            \"s_prdt_ali\": \"NRML\",\n            \"prd\": \"M\",\n            \"status\": \"COMPLETE\",\n            \"st_intrn\": \"COMPLETE\",\n            \"norentm\": \"15:15:10 02-05-2023\",\n            \"remarks\": \"WC TEST Order\",\n            \"rejreason\": null,\n            \"rqty\": \"2\"\n        },\n           \"stat\": null,\n    \"request_time\": null,\n    \"emsg\": null\n    ]\n},\n\"errors\": null,\n\"status\": \"200\"\n\n```\n\n}\n\nFailure Response :\n\n{\"stat\":\"Not_Ok\",\"request_time\":\"09:23:02 04-05-2023\",\"emsg\":\"Error Occurred : 5 \"no data\"\"}"
+			},
+			"response": [
+				{
+					"name": "Get All Order Book",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:9004/istock/api/order-book",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"order-book"
+							],
+							"query": [
+								{
+									"key": "jKey",
+									"value": "4967eba9494c6540fa83fcbbf40e2cb87b13804d57ac1102cf9e3df4f1627ca4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 06:05:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n\n    \"data\": {\n\n        \"orderBook\": [\n\n            {\n\n                \"stat\": \"Ok\",\n\n                \"norenordno\": \"23050200000033\",\n\n                \"kidid\": \"1\",\n\n                \"uid\": \"TEST1\",\n\n                \"actid\": \"TEST1\",\n\n                \"exch\": \"NSE\",\n\n                \"tsym\": \"ACC-EQ\",\n\n                \"qty\": \"2\",\n\n                \"ordenttm\": \"1683020711\",\n\n                \"trantype\": \"B\",\n\n                \"prctyp\": \"MKT\",\n\n                \"ret\": \"DAY\",\n\n                \"token\": \"22\",\n\n                \"mult\": \"1\",\n\n                \"prcftr\": \"1.000000\",\n\n                \"pp\": \"2\",\n\n                \"ls\": \"1\",\n\n                \"ti\": \"0.05\",\n\n                \"prc\": \"0.00\",\n\n                \"rprc\": \"1763.00\",\n\n                \"dscqty\": \"0\",\n\n                \"s_prdt_ali\": \"NRML\",\n\n                \"prd\": \"M\",\n\n                \"status\": \"COMPLETE\",\n\n                \"st_intrn\": \"COMPLETE\",\n\n                \"norentm\": \"15:15:11 02-05-2023\",\n\n                \"remarks\": \"WC TEST Order\",\n\n                \"rejreason\": null,\n\n                \"rqty\": \"2\"\n\n            },\n\n            {\n\n                \"stat\": \"Ok\",\n\n                \"norenordno\": \"23050200000032\",\n\n                \"kidid\": \"1\",\n\n                \"uid\": \"TEST1\",\n\n                \"actid\": \"TEST1\",\n\n                \"exch\": \"NSE\",\n\n                \"tsym\": \"ACC-EQ\",\n\n                \"qty\": \"2\",\n\n                \"ordenttm\": \"1683020710\",\n\n                \"trantype\": \"B\",\n\n                \"prctyp\": \"MKT\",\n\n                \"ret\": \"DAY\",\n\n                \"token\": \"22\",\n\n                \"mult\": \"1\",\n\n                \"prcftr\": \"1.000000\",\n\n                \"pp\": \"2\",\n\n                \"ls\": \"1\",\n\n                \"ti\": \"0.05\",\n\n                \"prc\": \"0.00\",\n\n                \"rprc\": \"1763.00\",\n\n                \"dscqty\": \"0\",\n\n                \"s_prdt_ali\": \"NRML\",\n\n                \"prd\": \"M\",\n\n                \"status\": \"COMPLETE\",\n\n                \"st_intrn\": \"COMPLETE\",\n\n                \"norentm\": \"15:15:10 02-05-2023\",\n\n                \"remarks\": \"WC TEST Order\",\n\n                \"rejreason\": null,\n\n                \"rqty\": \"2\"\n\n            },\n\n          \n\n               \"stat\": null,\n\n\t\t\"request_time\": null,\n\n\t\t\"emsg\": null\n\n        ]\n\n    },\n\n    \"errors\": null,\n\n    \"status\": \"200\"\n\n}"
+				}
+			]
+		},
+		{
+			"name": "Get Pending Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/istock/api/pending-order",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"pending-order"
+					],
+					"query": [
+						{
+							"key": "jKey",
+							"value": "4967eba9494c6540fa83fcbbf40e2cb87b13804d57ac1102cf9e3df4f1627ca4",
+							"disabled": true
+						}
+					]
+				},
+				"description": "1.This Api is used to fetch Pending order detail from Integration layer\n\n2. Integration layer fetch the detail from shoonya API\n\n3. Get Pending Order Book api used to get Pending order detail\n\n4. OnBoarding Authorization Bearer Token is mandatory.\n\nThe following request and response for this api. \n\nSuccess Response : \n\n{\n    \"data\": {\n        \"orderBook\": [\n            {\n                \"stat\": \"Ok\",\n                \"norenordno\": \"23050200000033\",\n                \"kidid\": \"1\",\n                \"uid\": \"TEST1\",\n                \"actid\": \"TEST1\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"ACC-EQ\",\n                \"qty\": \"2\",\n                \"ordenttm\": \"1683020711\",\n                \"trantype\": \"B\",\n                \"prctyp\": \"MKT\",\n                \"ret\": \"DAY\",\n                \"token\": \"22\",\n                \"mult\": \"1\",\n                \"prcftr\": \"1.000000\",\n                \"pp\": \"2\",\n                \"ls\": \"1\",\n                \"ti\": \"0.05\",\n                \"prc\": \"0.00\",\n                \"rprc\": \"1763.00\",\n                \"dscqty\": \"0\",\n                \"s_prdt_ali\": \"NRML\",\n                \"prd\": \"M\",\n                \"status\": \"OPEN\",\n                \"st_intrn\": \"OPEN\",\n                \"norentm\": \"15:15:11 02-05-2023\",\n                \"remarks\": \"WC TEST Order\",\n                \"rejreason\": null,\n                \"rqty\": \"2\"\n            },\n               \"stat\": null,\n\t\t\"request_time\": null,\n\t\t\"emsg\": null\n        ]\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}\n\n\nFailure Response :\n\n{\"stat\":\"Not_Ok\",\"request_time\":\"09:23:02 04-05-2023\",\"emsg\":\"Error Occurred : 5 \\\"no data\\\"\"}"
+			},
+			"response": [
+				{
+					"name": "Get Pending Order Book",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:9004/istock/api/pending-order",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"pending-order"
+							],
+							"query": [
+								{
+									"key": "jKey",
+									"value": "4967eba9494c6540fa83fcbbf40e2cb87b13804d57ac1102cf9e3df4f1627ca4",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 06:05:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"orderBook\": [\n            {\n                \"stat\": \"Ok\",\n                \"norenordno\": \"23050200000033\",\n                \"kidid\": \"1\",\n                \"uid\": \"TEST1\",\n                \"actid\": \"TEST1\",\n                \"exch\": \"NSE\",\n                \"tsym\": \"ACC-EQ\",\n                \"qty\": \"2\",\n                \"ordenttm\": \"1683020711\",\n                \"trantype\": \"B\",\n                \"prctyp\": \"MKT\",\n                \"ret\": \"DAY\",\n                \"token\": \"22\",\n                \"mult\": \"1\",\n                \"prcftr\": \"1.000000\",\n                \"pp\": \"2\",\n                \"ls\": \"1\",\n                \"ti\": \"0.05\",\n                \"prc\": \"0.00\",\n                \"rprc\": \"1763.00\",\n                \"dscqty\": \"0\",\n                \"s_prdt_ali\": \"NRML\",\n                \"prd\": \"M\",\n                \"status\": \"OPEN\",\n                \"st_intrn\": \"OPEN\",\n                \"norentm\": \"15:15:11 02-05-2023\",\n                \"remarks\": \"WC TEST Order\",\n                \"rejreason\": null,\n                \"rqty\": \"2\"\n            },\n               \"stat\": null,\n\t\t\"request_time\": null,\n\t\t\"emsg\": null\n        ]\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Limits",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/istock/api/limits",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"limits"
+					],
+					"query": [
+						{
+							"key": "jKey",
+							"value": "4967eba9494c6540fa83fcbbf40e2cb87b13804d57ac1102cf9e3df4f1627ca4",
+							"disabled": true
+						}
+					]
+				},
+				"description": "- This Api is used to fetch following details from Integration layer:\n    - cash\n    - payin\n    - marginused\n- OnBoarding Authorization Bearer Token is mandatory.\n- If marginused is null or not getting value then it will be \"0.00\"."
+			},
+			"response": [
+				{
+					"name": "Limits",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:9004/istock/api/limits",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"limits"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"data\": {\r\n        \"cash\": \"9999999999.15\",\r\n        \"payin\": \"0.00\",\r\n        \"marginused\": \"0.00\"\r\n    },\r\n    \"errors\": null,\r\n    \"status\": \"200\"\r\n}"
+				}
+			]
+		},
+		{
+			"name": "Max Payout",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "4967eba9494c6540fa83fcbbf40e2cb87b13804d57ac1102cf9e3df4f1627ca4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/istock/api/max-payout",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"max-payout"
+					]
+				},
+				"description": "- This Api is used to fetch following details from Integration layer:\n    - payout\n- OnBoarding Authorization Bearer Token is mandatory.\n- If payout is null or not getting value then it will be \"0.00\"."
+			},
+			"response": [
+				{
+					"name": "Max Payout",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}:9004/istock/api/max-payout",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"max-payout"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 26 Apr 2023 06:05:11 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"payout\": \"9999999999.15\"\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Holdings Details",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"prd\": \"C\"\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/holdings-details",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"holdings-details"
+					]
+				},
+				"description": "Type : POST\n\n- This Post API is used to get only NSE Exchange Holdings.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| prd | M | VARCHAR |  | Only C (uppercase) is Allowed |"
+			},
+			"response": [
+				{
+					"name": "Holdings Details-Success",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prd\": \"C\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:9004/istock/api/holdings-details",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"holdings-details"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"data\": {\r\n        \"holdings\": [\r\n            {\r\n                \"exch_tsym\": [\r\n                    {\r\n                        \"exch\": \"NSE\",\r\n                        \"token\": \"11915\",\r\n                        \"tsym\": \"YESBANK-EQ\",\r\n                        \"isin\": \"INE528G01035\"\r\n                    }\r\n                ],\r\n                \"holdqty\": \"488\",\r\n                \"upldprc\": \"33.76\",\r\n                \"npoadqty\": null\r\n            }\r\n        ],\r\n        \"stat\": \"Ok\",\r\n        \"emsg\": null\r\n    },\r\n    \"errors\": null,\r\n    \"status\": \"200\"\r\n}\r\n"
+				},
+				{
+					"name": "Holdings Details-Failure",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"prd\": \"C\"\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}:9004/istock/api/holdings-details",
+							"host": [
+								"{{url}}"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"holdings-details"
+							]
+						}
+					},
+					"_postman_previewlanguage": "Text",
+					"header": null,
+					"cookie": [],
+					"body": "{\r\n    \"data\": {\r\n        \"holdings\": [],\r\n        \"stat\": \"Not_Ok\",\r\n        \"emsg\": \"No record found for Holdings\"\r\n    },\r\n    \"errors\": null,\r\n    \"status\": \"200\"\r\n}\r\n"
+				}
+			]
+		},
+		{
+			"name": "position-book-api",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "jKey",
+						"value": "74d59664a3c2a0df792d08221bfb335060dab6dabba5d784af454ee28153b045",
+						"type": "text"
+					},
+					{
+						"key": "uid",
+						"value": "TEST05",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/position-book",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"position-book"
+					]
+				},
+				"description": "Type : GET  \nThis api is used to get List of position book from shoonya for logged in user.  \nOnBoarding Authorization Bearer Token is mandatory."
+			},
+			"response": [
+				{
+					"name": "position-book-api",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "jKey",
+								"value": "74d59664a3c2a0df792d08221bfb335060dab6dabba5d784af454ee28153b045",
+								"type": "text"
+							},
+							{
+								"key": "uid",
+								"value": "TEST05",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "localhost:9004/istock/api/position-book",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"position-book"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 23 May 2023 08:54:50 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"data\": [\n            {\n                \"tsym\": \"RELIANCE-EQ\",\n                \"netqty\": \"20\",\n                \"netavgprc\": \"2455.00\"\n            },\n            {\n                \"tsym\": \"WIPRO-EQ\",\n                \"netqty\": \"20\",\n                \"netavgprc\": \"390.00\"\n            },\n            {\n                \"tsym\": \"TCS-EQ\",\n                \"netqty\": \"20\",\n                \"netavgprc\": \"3313.55\"\n            },\n            {\n                \"tsym\": \"YESBANK-EQ\",\n                \"netqty\": \"20\",\n                \"netavgprc\": \"15.65\"\n            }\n        ],\n        \"stat\": null,\n        \"request_time\": null,\n        \"emsg\": null\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "client-details",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "jkey",
+						"value": "d41d975a37bdd536389b79a44758788997bdfac4833577fa9c5116d451344223",
+						"type": "text",
+						"disabled": true
+					},
+					{
+						"key": "uid",
+						"value": "TEST2",
+						"type": "text",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/client-details",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"client-details"
+					]
+				},
+				"description": "Type : GET\n\n- This GET API is used to get Client Details from \"Shoonya\".\n- OnBoarding Authorization Bearer Token is mandatory.\n- Request Body : NA"
+			},
+			"response": [
+				{
+					"name": "client-details",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "jkey",
+								"value": "d41d975a37bdd536389b79a44758788997bdfac4833577fa9c5116d451344223",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "uid",
+								"value": "TEST2",
+								"type": "text",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "localhost:9004/istock/api/client-details",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"client-details"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 26 May 2023 03:59:12 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"stat\": \"Ok\",\n        \"client_details\": {\n            \"request_time\": \"09:24:46 26-05-2023\",\n            \"actid\": \"TEST1\",\n            \"cliname\": \"Test1_UAT\",\n            \"act_sts\": \"Activated\",\n            \"creatdte\": \"1644403448\",\n            \"creattme\": \"1685001564\",\n            \"m_num\": \"9769893440\",\n            \"email\": \"poojavijayvergia@googlemail.com\",\n            \"pan\": \"AYJPB4562B\",\n            \"dob\": \"29-03-1980\",\n            \"addr\": \"D179\",\n            \"addroffice\": \"\",\n            \"addrcity\": \"\",\n            \"addrstate\": \"\",\n            \"mandate_id_list\": [],\n            \"exarr\": [\n                \"NSE\",\n                \"NFO\",\n                \"CDS\",\n                \"MCX\",\n                \"BSE\",\n                \"BCD\",\n                \"NCX\",\n                \"BSTAR\"\n            ],\n            \"bankdetails\": [\n                {\n                    \"bankn\": \"HDFC BANK\",\n                    \"acctnum\": \"50100018289736\",\n                    \"ifsc_code\": \"HDFC0000213\"\n                },\n                {\n                    \"bankn\": \"HDFC BANK\",\n                    \"acctnum\": \"50100018289735\",\n                    \"ifsc_code\": \"HDFC0000213\"\n                }\n            ],\n            \"dp_acct_num\": []\n        },\n        \"emsg\": null\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "IstockTopGainerLooser",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "uid",
+						"value": "TEST2",
+						"type": "text"
+					},
+					{
+						"key": "jkey",
+						"value": "84aa4db980d47f77a0bf6a72b0dcb8408b7ae9418f7191e67f25bf4d353acc4e",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/top-gainer-looser?topbottom=T",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"top-gainer-looser"
+					],
+					"query": [
+						{
+							"key": "topbottom",
+							"value": "T"
+						}
+					]
+				},
+				"description": "- Type : GET\n- This api is used to get List of top 6 gainers or bottom 6 looser stocks based on query param topbottom value\n- Query param topbottom takes value \"T\" to display top 6 records.\n- Query param topbottom takes value \"B\" to display bottom 6 records.\n- OnBoarding Authorization Bearer Token is mandatory."
+			},
+			"response": [
+				{
+					"name": "TopGainerLooser Copy",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "uid",
+								"value": "TEST2",
+								"type": "text"
+							},
+							{
+								"key": "jkey",
+								"value": "84aa4db980d47f77a0bf6a72b0dcb8408b7ae9418f7191e67f25bf4d353acc4e",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9004/istock/api/top-gainer-looser?topbottom=T",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"top-gainer-looser"
+							],
+							"query": [
+								{
+									"key": "topbottom",
+									"value": "T"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Wed, 07 Jun 2023 09:35:46 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": [\n        {\n            \"tsym\": \"SUZLON-EQ\",\n            \"pc\": \"17.622955\",\n            \"ltp\": \"14.35\"\n        },\n        {\n            \"tsym\": \"JBMA-EQ\",\n            \"pc\": \"9.055783\",\n            \"ltp\": \"874.9\"\n        },\n        {\n            \"tsym\": \"IDEA-EQ\",\n            \"pc\": \"8.510636\",\n            \"ltp\": \"7.65\"\n        },\n        {\n            \"tsym\": \"TORNTPOWER-EQ\",\n            \"pc\": \"8.33061\",\n            \"ltp\": \"663.2\"\n        },\n        {\n            \"tsym\": \"TTML-EQ\",\n            \"pc\": \"8.076007\",\n            \"ltp\": \"68.25\"\n        },\n        {\n            \"tsym\": \"RTNINDIA-EQ\",\n            \"pc\": \"7.368419\",\n            \"ltp\": \"40.8\"\n        }\n    ],\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Financial Consolidated PnL",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"exch\":null,\r\n    \"token\":\"10666\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/financial-consolidated-pnl",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"financial-consolidated-pnl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Financial Standalone PnL",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "\r\n{\r\n    \"exch\":\"\",\r\n    \"token\":\"10666\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/financial-standalone-pnl",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"financial-standalone-pnl"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "financial-standalone-balance-sheet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10666\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/financial-standalone-balance-sheet",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"financial-standalone-balance-sheet"
+					]
+				},
+				"description": "Type : POST\n\n- This Post API is used to get Financial Standalone Balance Sheet only for NSE Exchange related scrip.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| exch | M | VARCHAR |  | Only NSE (uppercase) is Allowed |\n| token | M | VARCHAR |  | Only digits (0-9) are allowed in the token and 0 is not allowed at the beginning (i.e. as prefix) |"
+			},
+			"response": [
+				{
+					"name": "financial-standalone-balance-sheet",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10666\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/financial-standalone-balance-sheet",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"financial-standalone-balance-sheet"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 04:32:22 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"co_code\": \"7855\",\n        \"bse_code\": \"532461\",\n        \"nse_sym\": \"PNB\",\n        \"norentm\": \"1687235259\",\n        \"noren_nsecs\": \"886658596\",\n        \"standalone_balancesheet_list\": [\n            {\n                \"yrc\": \"202109\",\n                \"invest\": \"363626.22\",\n                \"fixassets\": \"10826.76\",\n                \"restot\": \"93497.58\",\n                \"sharecap\": \"2202.20\",\n                \"invtotal\": \"0.00\",\n                \"sdb\": \"0.00\",\n                \"cash\": \"0.00\",\n                \"xoliab\": \"1265907.12\",\n                \"eqshwrnt\": \"0.00\",\n                \"totloan\": \"0.00\",\n                \"othcasset\": \"0.00\",\n                \"currliab\": \"0.00\"\n            },\n            {\n                \"yrc\": \"202103\",\n                \"invest\": \"392983.25\",\n                \"fixassets\": \"11020.90\",\n                \"restot\": \"88841.77\",\n                \"sharecap\": \"2095.54\",\n                \"invtotal\": \"0.00\",\n                \"sdb\": \"0.00\",\n                \"cash\": \"0.00\",\n                \"xoliab\": \"1260632.62\",\n                \"eqshwrnt\": \"0.00\",\n                \"totloan\": \"0.00\",\n                \"othcasset\": \"0.00\",\n                \"currliab\": \"0.00\"\n            }\n        ]\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				},
+				{
+					"name": "financial-standalone-balance-sheet",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10665\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/financial-standalone-balance-sheet",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"financial-standalone-balance-sheet"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 04:31:58 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": null,\n    \"errors\": [\n        {\n            \"error_message\": \"Invalid Input :  Invalid Scrip token/exch\",\n            \"error_code\": \"20001\"\n        }\n    ],\n    \"status\": \"400\"\n}"
+				}
+			]
+		},
+		{
+			"name": "financial-consolidated-balance-sheet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\":\"7855\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/financial-consolidated-balance-sheet",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"financial-consolidated-balance-sheet"
+					]
+				},
+				"description": "Type : POST\n\n- This Post API is used to get Financial Consolidated Balance Sheet only for NSE Exchange related scrip.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| exch | M | VARCHAR |  | Only NSE (uppercase) is Allowed |\n| token | M | VARCHAR |  | Only digits (0-9) are allowed in the token and 0 is not allowed at the beginning (i.e. as prefix) |"
+			},
+			"response": [
+				{
+					"name": "financial-consolidated-balance-sheet",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10666\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/financial-consolidated-balance-sheet",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"financial-consolidated-balance-sheet"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 04:33:13 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"co_code\": \"7855\",\n        \"bse_code\": \"532461\",\n        \"nse_sym\": \"PNB\",\n        \"norentm\": \"1687235310\",\n        \"noren_nsecs\": \"68912791\",\n        \"consolidated_balancesheet_list\": [\n            {\n                \"yrc\": \"202109\",\n                \"invest\": \"383318.88\",\n                \"fixassets\": \"10852.15\",\n                \"restot\": \"95292.39\",\n                \"sharecap\": \"2202.20\",\n                \"invtotal\": \"0.00\",\n                \"sdb\": \"0.00\",\n                \"cash\": \"0.00\",\n                \"xoliab\": \"1293576.38\",\n                \"eqshwrnt\": \"0.00\",\n                \"totloan\": \"0.00\",\n                \"othcasset\": \"0.00\",\n                \"currliab\": \"0.00\"\n            },\n            {\n                \"yrc\": \"202103\",\n                \"invest\": \"404368.97\",\n                \"fixassets\": \"11048.71\",\n                \"restot\": \"90438.79\",\n                \"sharecap\": \"2095.54\",\n                \"invtotal\": \"0.00\",\n                \"sdb\": \"0.00\",\n                \"cash\": \"0.00\",\n                \"xoliab\": \"1279725.00\",\n                \"eqshwrnt\": \"0.00\",\n                \"totloan\": \"0.00\",\n                \"othcasset\": \"0.00\",\n                \"currliab\": \"0.00\"\n            }\n        ]\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				},
+				{
+					"name": "financial-consolidated-balance-sheet",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10665\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/financial-consolidated-balance-sheet",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"financial-consolidated-balance-sheet"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 04:33:28 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": null,\n    \"errors\": [\n        {\n            \"error_message\": \"Invalid Input :  Invalid Scrip token/exch\",\n            \"error_code\": \"20001\"\n        }\n    ],\n    \"status\": \"400\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Fundamental Consolidated Result Sheet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"22\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/fundamental-consolidated-result",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"fundamental-consolidated-result"
+					]
+				},
+				"description": "Type : POST\n\n- This Post API is used to get Fundamental Consolidated Sheet only for NSE Exchange related scrip.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| exch | M | VARCHAR |  | Only NSE (uppercase) is Allowed |\n| token | M | VARCHAR |  | Only digits (0-9) are allowed in the token and 0 is not allowed at the beginning (i.e. as prefix) |"
+			},
+			"response": [
+				{
+					"name": "fundamental-consolidated-result-sheet",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10666\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/fundamental-consolidated-result",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"fundamental-consolidated-result"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 04:32:22 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n\t\"data\": {\n\t\t\"co_code\": \"7855\",\n\t\t\"bse_code\": \"532461\",\n\t\t\"nse_sym\": \"PNB\",\n\t\t\"norentm\": \"1685953678\",\n\t\t\"noren_nsecs\": \"951155319\",\n\t\t\"Consolidated_AggFin_Data_list\": [{\n\t\t\t\t\"yrc\": \"202103\",\n\t\t\t\t\"nom\": \"12\",\n\t\t\t\t\"advan\": \"679345.75\",\n\t\t\t\t\"anndivp\": \"0.00\",\n\t\t\t\t\"approp\": \"-8162.51\",\n\t\t\t\t\"appstres\": \"617.30\",\n\t\t\t\t\"bv\": \"81.44\",\n\t\t\t\t\"conliab\": \"425881.69\",\n\t\t\t\t\"depn\": \"982.23\",\n\t\t\t\t\"divper\": \"0.00\",\n\t\t\t\t\"eps\": \"2.05\",\n\t\t\t\t\"exd\": \"0.00\",\n\t\t\t\t\"expcap\": \"0.00\",\n\t\t\t\t\"extraitem\": \"0.00\",\n\t\t\t\t\"fixassets\": \"11048.71\",\n\t\t\t\t\"gp\": \"4764.59\",\n\t\t\t\t\"int\": \"50804.58\",\n\t\t\t\t\"invest\": \"404368.97\",\n\t\t\t\t\"lnfunds\": \"0.00\",\n\t\t\t\t\"mexp\": \"0.00\",\n\t\t\t\t\"np\": \"2152.43\",\n\t\t\t\t\"nwcap\": \"164272.69\",\n\t\t\t\t\"othinc\": \"13124.45\",\n\t\t\t\t\"pnlbf\": \"-8369.07\",\n\t\t\t\t\"pnlcd\": \"1738.11\",\n\t\t\t\t\"restot\": \"90438.80\",\n\t\t\t\t\"rmc\": \"0.00\",\n\t\t\t\t\"sharecap\": \"2095.54\",\n\t\t\t\t\"sloan\": \"52298.14\",\n\t\t\t\t\"sto\": \"81866.40\",\n\t\t\t\t\"stock_adj\": \"0.00\",\n\t\t\t\t\"tax\": \"1629.93\",\n\t\t\t\t\"totcasset\": \"186149.78\",\n\t\t\t\t\"invtotal\": \"0.00\",\n\t\t\t\t\"sdb\": \"0.00\",\n\t\t\t\t\"cash\": \"113334.43\",\n\t\t\t\t\"loans\": \"72815.35\",\n\t\t\t\t\"totcliab\": \"21877.09\",\n\t\t\t\t\"totoloan\": \"1113716.88\",\n\t\t\t\t\"value\": \"39421.68\",\n\t\t\t\t\"xassets\": \"1259036.12\",\n\t\t\t\t\"xinc\": \"94990.85\",\n\t\t\t\t\"xoliab\": \"1259036.12\",\n\t\t\t\t\"nonpasset\": \"0.00\",\n\t\t\t\t\"nnpaasset\": \"0.00\",\n\t\t\t\t\"npasales\": \"0.00\",\n\t\t\t\t\"capadeq\": \"0.00\",\n\t\t\t\t\"t1cap\": \"0.00\",\n\t\t\t\t\"t2cap\": \"0.00\",\n\t\t\t\t\"iiawf\": \"0.00\",\n\t\t\t\t\"niiawf\": \"0.00\",\n\t\t\t\t\"retasset\": \"0.00\",\n\t\t\t\t\"bperemp\": \"0.00\",\n\t\t\t\t\"pperemp\": \"0.00\",\n\t\t\t\t\"eidata\": \"N\",\n\t\t\t\t\"deftax\": \"0.00\",\n\t\t\t\t\"minintp1\": \"0.00\",\n\t\t\t\t\"minintp2\": \"132.62\",\n\t\t\t\t\"npami\": \"2561.97\",\n\t\t\t\t\"minintl\": \"486.79\",\n\t\t\t\t\"eps1\": \"2.45\",\n\t\t\t\t\"accdepn\": \"12099.39\",\n\t\t\t\t\"cwip\": \"0.00\",\n\t\t\t\t\"defcrfa\": \"6272.14\",\n\t\t\t\t\"gbl\": \"23148.10\",\n\t\t\t\t\"lsetadj\": \"0.00\",\n\t\t\t\t\"sectydep\": \"0.00\",\n\t\t\t\t\"cashrbi\": \"40769.41\",\n\t\t\t\t\"dtaxca\": \"28209.61\",\n\t\t\t\t\"dtaxcl\": \"1188.15\",\n\t\t\t\t\"money\": \"69067.16\",\n\t\t\t\t\"oliab\": \"0.00\",\n\t\t\t\t\"othcash\": \"3497.86\",\n\t\t\t\t\"sdc\": \"21877.09\",\n\t\t\t\t\"billco\": \"13332.58\",\n\t\t\t\t\"divpryr\": \"180.51\",\n\t\t\t\t\"divr\": \"0.00\",\n\t\t\t\t\"divtax\": \"0.00\",\n\t\t\t\t\"emc\": \"12296.72\",\n\t\t\t\t\"omfgexp\": \"489.95\",\n\t\t\t\t\"pfc\": \"0.00\",\n\t\t\t\t\"prdiv\": \"0.00\",\n\t\t\t\t\"pyadj\": \"0.00\",\n\t\t\t\t\"sac\": \"3444.67\",\n\t\t\t\t\"othexp\": \"23190.33\",\n\t\t\t\t\"billscoll\": \"40493.76\",\n\t\t\t\t\"year\": \"2021\",\n\t\t\t\t\"fbtax\": \"0.00\",\n\t\t\t\t\"imparbs\": \"0.00\",\n\t\t\t\t\"plassco\": \"542.16\",\n\t\t\t\t\"eqshwrnt\": \"0.00\",\n\t\t\t\t\"eqwrapmy\": \"0.00\",\n\t\t\t\t\"servtax\": \"0.00\",\n\t\t\t\t\"dps\": \"0.00\",\n\t\t\t\t\"polhldfund\": \"0.00\",\n\t\t\t\t\"otherliab\": \"0.00\",\n\t\t\t\t\"otherasset\": \"0.00\",\n\t\t\t\t\"flag\": \"A\"\n\t\t\t},\n\t\t\t{\n\t\t\t\t\"yrc\": \"202003\",\n\t\t\t\t\"nom\": \"12\",\n\t\t\t\t\"advan\": \"476853.34\",\n\t\t\t\t\"anndivp\": \"0.00\",\n\t\t\t\t\"approp\": \"178.88\",\n\t\t\t\t\"appstres\": \"139.74\",\n\t\t\t\t\"bv\": \"87.74\",\n\t\t\t\t\"conliab\": \"241351.94\",\n\t\t\t\t\"depn\": \"614.44\",\n\t\t\t\t\"divper\": \"0.00\",\n\t\t\t\t\"eps\": \"0.54\",\n\t\t\t\t\"exd\": \"0.00\",\n\t\t\t\t\"expcap\": \"0.00\",\n\t\t\t\t\"extraitem\": \"0.00\",\n\t\t\t\t\"fixassets\": \"7261.98\",\n\t\t\t\t\"gp\": \"1441.44\",\n\t\t\t\t\"int\": \"36997.47\",\n\t\t\t\t\"invest\": \"253782.47\",\n\t\t\t\t\"lnfunds\": \"0.00\",\n\t\t\t\t\"mexp\": \"0.00\",\n\t\t\t\t\"np\": \"363.33\",\n\t\t\t\t\"nwcap\": \"99106.04\",\n\t\t\t\t\"othinc\": \"9387.65\",\n\t\t\t\t\"pnlbf\": \"-8488.91\",\n\t\t\t\t\"pnlcd\": \"-8369.07\",\n\t\t\t\t\"restot\": \"62528.86\",\n\t\t\t\t\"rmc\": \"0.00\",\n\t\t\t\t\"sharecap\": \"1347.51\",\n\t\t\t\t\"sloan\": \"62512.41\",\n\t\t\t\t\"sto\": \"54918.48\",\n\t\t\t\t\"stock_adj\": \"0.00\",\n\t\t\t\t\"tax\": \"463.67\",\n\t\t\t\t\"totcasset\": \"114037.73\",\n\t\t\t\t\"invtotal\": \"0.00\",\n\t\t\t\t\"sdb\": \"0.00\",\n\t\t\t\t\"cash\": \"77755.75\",\n\t\t\t\t\"loans\": \"36281.98\",\n\t\t\t\t\"totcliab\": \"14931.68\",\n\t\t\t\t\"totoloan\": \"710254.38\",\n\t\t\t\t\"value\": \"25867.21\",\n\t\t\t\t\"xassets\": \"837003.81\",\n\t\t\t\t\"xinc\": \"64306.13\",\n\t\t\t\t\"xoliab\": \"837003.81\",\n\t\t\t\t\"nonpasset\": \"0.00\",\n\t\t\t\t\"nnpaasset\": \"0.00\",\n\t\t\t\t\"npasales\": \"0.00\",\n\t\t\t\t\"capadeq\": \"0.00\",\n\t\t\t\t\"t1cap\": \"0.00\",\n\t\t\t\t\"t2cap\": \"0.00\",\n\t\t\t\t\"iiawf\": \"0.00\",\n\t\t\t\t\"niiawf\": \"0.00\",\n\t\t\t\t\"retasset\": \"0.00\",\n\t\t\t\t\"bperemp\": \"0.00\",\n\t\t\t\t\"pperemp\": \"0.00\",\n\t\t\t\t\"eidata\": \"N\",\n\t\t\t\t\"deftax\": \"0.00\",\n\t\t\t\t\"minintp1\": \"0.00\",\n\t\t\t\t\"minintp2\": \"46.49\",\n\t\t\t\t\"npami\": \"438.45\",\n\t\t\t\t\"minintl\": \"360.69\",\n\t\t\t\t\"eps1\": \"0.65\",\n\t\t\t\t\"accdepn\": \"5140.67\",\n\t\t\t\t\"cwip\": \"0.00\",\n\t\t\t\t\"defcrfa\": \"7378.05\",\n\t\t\t\t\"gbl\": \"12402.65\",\n\t\t\t\t\"lsetadj\": \"0.00\",\n\t\t\t\t\"sectydep\": \"0.00\",\n\t\t\t\t\"cashrbi\": \"35841.61\",\n\t\t\t\t\"dtaxca\": \"20542.02\",\n\t\t\t\t\"dtaxcl\": \"478.28\",\n\t\t\t\t\"money\": \"39151.96\",\n\t\t\t\t\"oliab\": \"0.00\",\n\t\t\t\t\"othcash\": \"2762.18\",\n\t\t\t\t\"sdc\": \"14931.68\",\n\t\t\t\t\"billco\": \"13151.26\",\n\t\t\t\t\"divpryr\": \"32.07\",\n\t\t\t\t\"divr\": \"0.00\",\n\t\t\t\t\"divtax\": \"0.00\",\n\t\t\t\t\"emc\": \"7060.02\",\n\t\t\t\t\"omfgexp\": \"331.67\",\n\t\t\t\t\"pfc\": \"0.00\",\n\t\t\t\t\"prdiv\": \"0.00\",\n\t\t\t\t\"pyadj\": \"0.00\",\n\t\t\t\t\"sac\": \"2144.45\",\n\t\t\t\t\"othexp\": \"16331.07\",\n\t\t\t\t\"billscoll\": \"28052.60\",\n\t\t\t\t\"year\": \"2020\",\n\t\t\t\t\"fbtax\": \"0.00\",\n\t\t\t\t\"imparbs\": \"0.00\",\n\t\t\t\t\"plassco\": \"121.60\",\n\t\t\t\t\"eqshwrnt\": \"0.00\",\n\t\t\t\t\"eqwrapmy\": \"0.00\",\n\t\t\t\t\"servtax\": \"0.00\",\n\t\t\t\t\"dps\": \"0.00\",\n\t\t\t\t\"polhldfund\": \"0.00\",\n\t\t\t\t\"otherliab\": \"0.00\",\n\t\t\t\t\"otherasset\": \"0.00\",\n\t\t\t\t\"flag\": \"O\"\n\t\t\t}\n\t\t]\n\t},\n\t\"errors\": null,\n\t\"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "financial-consolidated-ratio-sheet",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10666\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/fundamental-consolidated-ratio",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"fundamental-consolidated-ratio"
+					]
+				},
+				"description": "Type : POST\n\n- This Post API is used to get Fundamental Consolidated Ratio Sheet only for NSE Exchange related scrip.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| exch | M | VARCHAR |  | Only NSE (uppercase) is Allowed |\n| token | M | VARCHAR |  | Only digits (0-9) are allowed in the token and 0 is not allowed at the beginning (i.e. as prefix) |"
+			},
+			"response": [
+				{
+					"name": "fundamental-consolidated-ratio",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10666\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/fundamental-consolidated-ratio",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"fundamental-consolidated-ratio"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 04:33:13 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n    \"co_code\": \"7855\",\n    \"bse_code\": \"532461\",\n    \"nse_sym\": \"PNB\",\n    \"norentm\": \"1685953813\",\n    \"noren_nsecs\": \"715459864\",\n    \"Consolidated_key_finration_list\": [\n        {\n            \"yrc\": \"202103\",\n            \"dte\": \"0.00\",\n            \"ltdte\": \"0.00\",\n            \"cr\": \"0.00\",\n            \"fato\": \"0.00\",\n            \"invto\": \"0.00\",\n            \"drsto\": \"0.00\",\n            \"intcover\": \"0.00\",\n            \"pbidtm\": \"0.00\",\n            \"pbdtm\": \"0.00\",\n            \"pbitm\": \"0.00\",\n            \"cpm\": \"0.00\",\n            \"apatm\": \"0.00\",\n            \"roce\": \"0.00\",\n            \"ronw\": \"2.82\",\n            \"creddept\": \"63.39\",\n            \"invtdept\": \"36.08\",\n            \"cashdept\": \"4.54\",\n            \"ietoie\": \"62.06\",\n            \"oitoti\": \"13.82\",\n            \"noniitotf\": \"1.24\",\n            \"netitotf\": \"2.93\",\n            \"oetoti\": \"21.60\",\n            \"iitotf\": \"7.72\",\n            \"ietotf\": \"4.79\",\n            \"oetotf\": \"1.94\",\n            \"pbptotf\": \"2.23\",\n            \"nptotf\": \"0.20\",\n            \"loanto\": \"0.00\",\n            \"advtolf\": \"0.00\",\n            \"titoce\": \"0.00\",\n            \"ietoce\": \"0.00\",\n            \"tato\": \"0.00\",\n            \"flag\": \"A\"\n        },\n        {\n            \"yrc\": \"202003\",\n            \"dte\": \"0.00\",\n            \"ltdte\": \"0.00\",\n            \"cr\": \"0.00\",\n            \"fato\": \"0.00\",\n            \"invto\": \"0.00\",\n            \"drsto\": \"0.00\",\n            \"intcover\": \"0.00\",\n            \"pbidtm\": \"0.00\",\n            \"pbdtm\": \"0.00\",\n            \"pbitm\": \"0.00\",\n            \"cpm\": \"0.00\",\n            \"apatm\": \"0.00\",\n            \"roce\": \"0.00\",\n            \"ronw\": \"0.66\",\n            \"creddept\": \"67.47\",\n            \"invtdept\": \"33.36\",\n            \"cashdept\": \"5.10\",\n            \"ietoie\": \"67.37\",\n            \"oitoti\": \"14.60\",\n            \"noniitotf\": \"1.15\",\n            \"netitotf\": \"2.19\",\n            \"oetoti\": \"18.89\",\n            \"iitotf\": \"6.72\",\n            \"ietotf\": \"4.53\",\n            \"oetotf\": \"1.49\",\n            \"pbptotf\": \"1.86\",\n            \"nptotf\": \"0.04\",\n            \"loanto\": \"0.00\",\n            \"advtolf\": \"0.00\",\n            \"titoce\": \"0.00\",\n            \"ietoce\": \"0.00\",\n            \"tato\": \"0.00\",\n            \"flag\": \"O\"\n        }\n       ]\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "fundamental-standalone-result",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"exch\": \"NSEt\",\r\n    \"token\": \"10666t\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/fundamental-standalone-result",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"fundamental-standalone-result"
+					]
+				},
+				"description": "Type : POST\n\n- This Post API is used to get Fundamental Consolidated Ratio Sheet only for NSE Exchange related scrip.\n- OnBoarding Authorization Bearer Token is mandatory.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| exch | M | VARCHAR |  | Only NSE (uppercase) is Allowed |\n| token | M | VARCHAR |  | Only digits (0-9) are allowed in the token and 0 is not allowed at the beginning (i.e. as prefix) |"
+			},
+			"response": [
+				{
+					"name": "fundamental-consolidated-ratio",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"exch\": \"NSE\",\r\n    \"token\": \"10666\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/fundamental-consolidated-ratio",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"fundamental-consolidated-ratio"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 04:33:13 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n    \"co_code\": \"7855\",\n    \"bse_code\": \"532461\",\n    \"nse_sym\": \"PNB\",\n    \"norentm\": \"1685953813\",\n    \"noren_nsecs\": \"715459864\",\n    \"Consolidated_key_finration_list\": [\n        {\n            \"yrc\": \"202103\",\n            \"dte\": \"0.00\",\n            \"ltdte\": \"0.00\",\n            \"cr\": \"0.00\",\n            \"fato\": \"0.00\",\n            \"invto\": \"0.00\",\n            \"drsto\": \"0.00\",\n            \"intcover\": \"0.00\",\n            \"pbidtm\": \"0.00\",\n            \"pbdtm\": \"0.00\",\n            \"pbitm\": \"0.00\",\n            \"cpm\": \"0.00\",\n            \"apatm\": \"0.00\",\n            \"roce\": \"0.00\",\n            \"ronw\": \"2.82\",\n            \"creddept\": \"63.39\",\n            \"invtdept\": \"36.08\",\n            \"cashdept\": \"4.54\",\n            \"ietoie\": \"62.06\",\n            \"oitoti\": \"13.82\",\n            \"noniitotf\": \"1.24\",\n            \"netitotf\": \"2.93\",\n            \"oetoti\": \"21.60\",\n            \"iitotf\": \"7.72\",\n            \"ietotf\": \"4.79\",\n            \"oetotf\": \"1.94\",\n            \"pbptotf\": \"2.23\",\n            \"nptotf\": \"0.20\",\n            \"loanto\": \"0.00\",\n            \"advtolf\": \"0.00\",\n            \"titoce\": \"0.00\",\n            \"ietoce\": \"0.00\",\n            \"tato\": \"0.00\",\n            \"flag\": \"A\"\n        },\n        {\n            \"yrc\": \"202003\",\n            \"dte\": \"0.00\",\n            \"ltdte\": \"0.00\",\n            \"cr\": \"0.00\",\n            \"fato\": \"0.00\",\n            \"invto\": \"0.00\",\n            \"drsto\": \"0.00\",\n            \"intcover\": \"0.00\",\n            \"pbidtm\": \"0.00\",\n            \"pbdtm\": \"0.00\",\n            \"pbitm\": \"0.00\",\n            \"cpm\": \"0.00\",\n            \"apatm\": \"0.00\",\n            \"roce\": \"0.00\",\n            \"ronw\": \"0.66\",\n            \"creddept\": \"67.47\",\n            \"invtdept\": \"33.36\",\n            \"cashdept\": \"5.10\",\n            \"ietoie\": \"67.37\",\n            \"oitoti\": \"14.60\",\n            \"noniitotf\": \"1.15\",\n            \"netitotf\": \"2.19\",\n            \"oetoti\": \"18.89\",\n            \"iitotf\": \"6.72\",\n            \"ietotf\": \"4.53\",\n            \"oetotf\": \"1.49\",\n            \"pbptotf\": \"1.86\",\n            \"nptotf\": \"0.04\",\n            \"loanto\": \"0.00\",\n            \"advtolf\": \"0.00\",\n            \"titoce\": \"0.00\",\n            \"ietoce\": \"0.00\",\n            \"tato\": \"0.00\",\n            \"flag\": \"O\"\n        }\n       ]\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				}
+			]
+		},
+		{
+			"name": "Withdraw Funds",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"max_withdr_lmt\": \"9\",\n\t\"cliname\": \"TEST98_UAT\",\n\t\"prfname\": \"CLIENT\",\n\t\"payout\": \"112\",\n\t\"acctnum\": \"50100018289735\",\n\t\"bankn\": \"HDFC BANK\",\n\t\"ifsc_code\": \"HDFC0000213\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/withdraw-funds",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"withdraw-funds"
+					]
+				},
+				"description": "- Type : POST\n- OnBoarding Authorization Bearer Token is mandatory.\n- This api is used for withdraw funds\n- There is no validation on backend side.\n- Ammount is mandatory.\n- payout is mandatory.\n- As per requirement there is no validation on parameter expect maxwithdrl and payout. so in validation column Adding NR. These validtaion will be hanlde by front side.\n    \n\n| **Parameter Name** | **Validation** | **Data Type** | **Default** | **Remark** |\n| --- | --- | --- | --- | --- |\n| maxWithdrLmt | M | Integer |  | Only Numeric and Dot Allowed |\n| emailId | NR | VARCHAR |  | No validtaion added |\n| cliname | NR | VARCHAR |  | No validtaion added |\n| prfname | NR | VARCHAR |  | No validtaion added |\n| payout | M | Integer |  | Only Numeric and Dot Allowed |\n| acctnum | NR | VARCHAR |  | No validtaion added |\n| ifscCode | NR | VARCHAR |  | No validtaion added |\n| bankn | NR | VARCHAR |  | No validtaion added |\n| seg | NR | VARCHAR | EQT | No need to send in request body, handled from back end. |\n| prd | NR | VARCHAR | C | No need to send in request body, handled from back end. |\n| remarks | NR | VARCHAR |  | No validtaion added |\n\nThere is some points that will hanldle by Front End.\n\n**Acceptance Criteria:**\n\n1. User should be able to enter amount in decimals.\n2. Payout request should be allowed between 8AM to 5PM in trading days only.\n3. If user is entering amount more than availaible for Payout then it should show him error that amount is not available for payout\n4. If user is entering payout amount before 8 AM and 5 PM then it should show that payout is available between the 8AM to 5PM in trading days\n5. Same as point number 4 if user is trying in Non Trading days.\n    \n\nBank details will be found in Get Client Details. Field name is 'bankdetails'\n\n1. In withdraw funds, user can only enter amount and a display will be shown that 'Availaible for Payout'. This amount will be received from Get Max Payout API wilth field name Payout. We are showing only this in UI.\n2. EQT and C only\n    \n\nNote: FYI\n\nThe logic for Payout at backend\n\nThe logic for payout is :\n\nValue \\* 100 = result.\n\nmake result as negative.\n\nExample:\n\nuser enter 100rs\n\n100 \\* 100 = 10000;\n\npayout amount will be = -10000;"
+			},
+			"response": [
+				{
+					"name": "Withdraw Funds Sucess",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"max_withdr_lmt\": \"9999999349.15\",\n\t\"cliname\": \"TEST10_UAT\",\n\t\"prfname\": \"CLIENT\",\n\t\"payout\": \"100\",\n\t\"acctnum\": \"50100018289735\",\n\t\"bankn\": \"HDFC BANK\",\n\t\"ifsc_code\": \"HDFC0000213\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/withdraw-funds",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"withdraw-funds"
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 06:02:34 GMT"
+						},
+						{
+							"key": "Keep-Alive",
+							"value": "timeout=60"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": {\n        \"request_time\": \"11:27:51 20-06-2023\",\n        \"trn_id\": \"20231710000001\",\n        \"stat\": \"W\",\n        \"emsg\": null\n    },\n    \"errors\": null,\n    \"status\": \"200\"\n}"
+				},
+				{
+					"name": "Withdraw Funds payout invalid ammount",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"max_withdr_lmt\": \"9\",\n\t\"cliname\": \"TEST10_UAT\",\n\t\"prfname\": \"CLIENT\",\n\t\"payout\": \"100\",\n\t\"acctnum\": \"50100018289735\",\n\t\"bankn\": \"HDFC BANK\",\n\t\"ifsc_code\": \"HDFC0000213\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "13.127.87.45:9004/istock/api/withdraw-funds",
+							"host": [
+								"13",
+								"127",
+								"87",
+								"45"
+							],
+							"port": "9004",
+							"path": [
+								"istock",
+								"api",
+								"withdraw-funds"
+							]
+						}
+					},
+					"status": "Bad Request",
+					"code": 400,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Date",
+							"value": "Tue, 20 Jun 2023 06:03:47 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "close"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"data\": null,\n    \"errors\": [\n        {\n            \"error_message\": \"payout value should not be Greater than MaxWithdrLmt\",\n            \"error_code\": \"20001\"\n        }\n    ],\n    \"status\": \"400\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/add-scrip-watchlist",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{"
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/add-scrip-watchlist",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"add-scrip-watchlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get -watch-list",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/istock/api/watch-list",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"watch-list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "withdraw-funds",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"max_withdr_lmt\": \"\",\r\n  \"email_id\": \"string\",\r\n  \"mob_num\": \"string\",\r\n  \"cliname\": \"string\",\r\n  \"prfname\": \"string\",\r\n  \"payout\": \"4030371239255309374992278011168794346912568205604012656866992867549.8544\",\r\n  \"acctnum\": \"string\",\r\n  \"ifsc_code\": \"string\",\r\n  \"bankn\": \"string\",\r\n  \"seg\": \"string\",\r\n  \"prd\": \"string\",\r\n  \"remarks\": \"string\",\r\n  \"pymt_vendor\": \"string\"\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/withdraw-funds",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"withdraw-funds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete-watchlist",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{Token_NeoBank}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"trading_symbols\": [\r\n    \"string\"\r\n  ]\r\n}"
+				},
+				"url": {
+					"raw": "{{url}}/istock/api/scrip-watchlist",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"scrip-watchlist"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Quotes",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "accept",
+						"value": "*/*"
+					}
+				],
+				"url": {
+					"raw": "{{url}}/istock/api/quotes-info?exch=NSE&token=22",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"istock",
+						"api",
+						"quotes-info"
+					],
+					"query": [
+						{
+							"key": "exch",
+							"value": "NSE"
+						},
+						{
+							"key": "token",
+							"value": "22"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Token_NeoBank",
+			"value": ""
+		},
+		{
+			"key": "trans_id",
+			"value": ""
+		},
+		{
+			"key": "url",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "HOST",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "dev",
+			"value": "",
+			"type": "string"
+		}
+	]
+}
